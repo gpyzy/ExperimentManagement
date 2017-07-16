@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperimentManagement", "ExperimentManagement\ExperimentManagement.csproj", "{D5DFF120-A2D6-4688-BAF1-5916C7D3BBB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld", "HelloWorld\HelloWorld.csproj", "{6FA23762-EDB7-44CA-8EE2-61B14A5B14B4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D5DFF120-A2D6-4688-BAF1-5916C7D3BBB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5DFF120-A2D6-4688-BAF1-5916C7D3BBB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5DFF120-A2D6-4688-BAF1-5916C7D3BBB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5DFF120-A2D6-4688-BAF1-5916C7D3BBB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FA23762-EDB7-44CA-8EE2-61B14A5B14B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FA23762-EDB7-44CA-8EE2-61B14A5B14B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FA23762-EDB7-44CA-8EE2-61B14A5B14B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FA23762-EDB7-44CA-8EE2-61B14A5B14B4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
