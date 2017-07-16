@@ -14,6 +14,5 @@ namespace ExperimentManagement
 		{
 			return new ExperimentMetadata { Name = experimentName, Id = experimentId };
 		}
-
 	}
 }

@@ -11,6 +11,7 @@ namespace HelloWorld
 		static void Main(string[] args)
 		{
 			ExperimentRegister.Register(new List<string> { "Exp01", "Exp02", "Exp03" });
+			ExperimentRegister.WithStopWatchStats(true);
 
 			for (int i = 0; i < 10; i++)
 			{
@@ -31,7 +32,7 @@ namespace HelloWorld
 							Helloworld3();
 							return;
 						default:
-							throw new NotImplementedException();
+							return;
 					}
 				});
 

@@ -31,9 +31,9 @@ namespace ExperimentManagement
 		#endregion
 
 		#region Methods
-		public static ExperimentRegister Register(string experimentName)
+		public static ExperimentRegister Register(string experimentId, string experimentName = "")
 		{
-			Instance.experimentList.Add(experimentName, ExperimentMetadata.New(experimentName));
+			Instance.experimentList.Add(experimentId, ExperimentMetadata.New(experimentId, experimentName));
 			return Instance;
 		}
 		public static ExperimentRegister Register(IList<string> experimentNames)
