@@ -7,11 +7,12 @@ namespace ExperimentManagement
 		{
 		}
 
+		public string Id { get; private set; }
 		public string Name { get; private set; }
 
-		public static ExperimentMetadata New(string experimentId)
+		public static ExperimentMetadata New(string experimentId, string experimentName)
 		{
-			return new ExperimentMetadata { Name = experimentId };
+			return new ExperimentMetadata { Name = experimentName, Id = experimentId };
 		}
 
 	}
