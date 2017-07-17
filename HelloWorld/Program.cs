@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Threading;
 using ExperimentManagement;
 
-
 namespace HelloWorld
 {
-	class Program
+	class MainClass
 	{
-		static void Main(string[] args)
+		public static void Main(string[] args)
 		{
 			ExperimentRegister.Register(new List<string> { "Exp01", "Exp02", "Exp03" });
 			ExperimentRegister.WithStopWatchStats(true);
@@ -35,13 +34,10 @@ namespace HelloWorld
 							return;
 					}
 				});
-
 			}
 
 			Console.ReadKey();
 		}
-
-
 
 		public static void Helloworld1()
 		{
@@ -58,6 +54,5 @@ namespace HelloWorld
 			Console.WriteLine("Hello World 3!");
 
 		}
-
 	}
 }
