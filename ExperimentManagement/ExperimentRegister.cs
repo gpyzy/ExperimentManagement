@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Collections.Concurrent;
+
 
 namespace ExperimentManagement
 {
@@ -12,11 +14,11 @@ namespace ExperimentManagement
 		private IExperimentManager expMgr = new ExperimentManager();
 
 		private Dictionary<string, ExperimentMetadata> experimentList = new Dictionary<string, ExperimentMetadata>();
-
+		private ConcurrentDictionary<int, Dictionary<string, int>> experimentStatistics = new ConcurrentDictionary<int, Dictionary<string, int>>();
 
 		private ExperimentRegister()
 		{
-
+			//System.Threading.Thread
 		}
 
 		#region properties
@@ -93,6 +95,13 @@ namespace ExperimentManagement
 			experimentAction(input);
 			sw.Stop();
 			return sw.ElapsedMilliseconds;
+		}
+
+		private static void ExperimentWithCallStackPath(Action<char> experimentAction, char input)
+		{
+			//var threadId = Thread
+
+
 		}
 		#endregion
 
