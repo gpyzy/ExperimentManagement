@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Collections.Concurrent;
-
+using System.Threading;
 
 namespace ExperimentManagement
 {
@@ -10,11 +10,12 @@ namespace ExperimentManagement
 	{
 
 		private bool stopWatchStats = false;
+		private bool callStackStats = false;
 		private ILog logger = new Logger();
 		private IExperimentManager expMgr = new ExperimentManager();
 
 		private Dictionary<string, ExperimentMetadata> experimentList = new Dictionary<string, ExperimentMetadata>();
-		private ConcurrentDictionary<int, Dictionary<string, int>> experimentStatistics = new ConcurrentDictionary<int, Dictionary<string, int>>();
+		private ConcurrentDictionary<int, SortedList<string, int>> experimentStatistics = new ConcurrentDictionary<int, Dictionary<string, int>>();
 
 		private ExperimentRegister()
 		{
@@ -54,9 +55,10 @@ namespace ExperimentManagement
 			return Instance;
 		}
 
-		public static ExperimentRegister WithCallStackPath(bool callstackPath)
+		public static ExperimentRegister WithCallStackStats(bool callStackStats)
 		{
-			throw new NotImplementedException();
+			Instance.callStackStats = callStackStats;
+			return Instance;
 		}
 
 		public static ExperimentRegister WithLog(ILog logger)
@@ -71,15 +73,25 @@ namespace ExperimentManagement
 			{
 				var peekResult = Instance.expMgr.Peek(experimentId);
 
+				var actionToRun = experimentAction;
+
 				if (Instance.stopWatchStats)
 				{
-					/// TODO - use the elapsedTime for performance statistics
-					var elapsedTime = ExperimentWithStopWatch(experimentAction, peekResult);
+					actionToRun = (char pr) =>
+					{
+						/// TODO - use the elapsedTime for performance statistics
+						var elapsedTime = ExperimentWithStopWatch(actionToRun, pr);
+					};
 				}
-				else
+				if (Instance.callStackStats)
 				{
-					experimentAction(peekResult);
+					actionToRun = (char pr) =>
+					{
+						ExperimentWithCallStackStats(actionToRun, pr, experimentId);
+
+					};
 				}
+
 			}
 			else
 			{
@@ -97,12 +109,49 @@ namespace ExperimentManagement
 			return sw.ElapsedMilliseconds;
 		}
 
-		private static void ExperimentWithCallStackPath(Action<char> experimentAction, char input)
+
+		private static void ExperimentWithCallStackStats(Action<char> experimentAction, char input, string experimentId)
 		{
-			//var threadId = Thread
+			experimentAction(input);
+
+			try
+			{
+				var threadId = Thread.CurrentThread.ManagedThreadId;
+				var sortList = PrepareExperimentStatistics(threadId);
+
+				if (sortList.ContainsKey(experimentId))
+				{
+					sortList[experimentId]++;
+				}
+				else
+				{
+					sortList.Add(experimentId, 1);
+				}
+			}
+			catch (Exception ex)
+			{
+				Instance.logger.Error("ExperimentWithCallStackStats faliure: " + ex.Message);
+			}
+
 
 
 		}
+
+		private static SortedList<string, int> PrepareExperimentStatistics(int key)
+		{
+			if (!Instance.experimentStatistics.ContainsKey(key))
+			{
+				if (!Instance.experimentStatistics.TryAdd(key, new SortedList<string, int>()))
+				{
+					/// https://stackoverflow.com/questions/11501931/can-concurrentdictionary-tryadd-fail
+					/// Nothing to do here
+				}
+			}
+
+			return Instance.experimentStatistics[key];
+		}
+
+
 		#endregion
 
 
