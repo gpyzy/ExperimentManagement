@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -35,7 +35,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ExperimentManagement\ExperimentManagement.csproj">
-      <Project>{E3058628-68C5-4509-BA76-66AB48C3A502}</Project>
+      <Project>{e3058628-68c5-4509-ba76-66ab48c3a502}</Project>
       <Name>ExperimentManagement</Name>
     </ProjectReference>
   </ItemGroup>
